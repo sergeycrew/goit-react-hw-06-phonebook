@@ -15,9 +15,11 @@ import { Notify } from 'notiflix';
 export const Form = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-  console.log(typeof contacts);
 
-  const handleSubmit = values => {
+  console.log(typeof contacts);
+  console.log(contacts);
+
+  const handleSubmit = (values, { resetForm }) => {
     const normalizedName = values.name.toLowerCase();
     const nameExists = contacts.find(
       ({ name }) => name.toLowerCase() === normalizedName
@@ -31,47 +33,8 @@ export const Form = () => {
     console.log(values);
     dispatch(addContact(values));
 
-    //resetForm();
+    resetForm();
   };
-
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-  // state = {
-  //   name: '',
-  //   number: '',
-  // };
-
-  // const nameInputId = nanoid();
-  // const numberInputId = nanoid();
-
-  // const handleChange = event => {
-  //   const { name, value } = event.target;
-  //   console.log(event.target);
-  //   switch (name) {
-  //     case 'name':
-  //       setName(value);
-  //       console.log(value);
-  //       break;
-  //     case 'number':
-  //       setNumber(value);
-  //       console.log(value);
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
-  // const onDelete = () => {
-  //   setName('');
-  //   setNumber('');
-  // };
-
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-  //   formSubmitHandler(name, number);
-  //   // this.props.onSubmit(this.state);
-  //   onDelete();
-  //   event.target.reset();
-  // };
 
   return (
     <Formik
@@ -79,7 +42,7 @@ export const Form = () => {
       validationSchema={formSchema}
       onSubmit={handleSubmit}
     >
-      <PhonebookForm onSubmit={handleSubmit}>
+      <PhonebookForm>
         <InputLabel>
           <TextInput placeholder="Full Name" type="text" name="name" />
           <StyledErrorMessage name="name" component="div" />

@@ -1,15 +1,19 @@
 import { SearchForm, InputLabel, TextInput } from './Filter.styled';
+import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import { filterContactsValue } from 'redux/filterSlice';
 
-export const Filter = ({ onChange, value }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const handleFilter = e => dispatch(filterContactsValue(e.target.value));
+
   return (
     <SearchForm>
       <InputLabel htmlFor={nanoid()}>
         <TextInput
           id={nanoid()}
-          onChange={onChange}
-          value={value}
+          onChange={handleFilter}
           type="text"
           name="filter"
           placeholder="find contacts by name"

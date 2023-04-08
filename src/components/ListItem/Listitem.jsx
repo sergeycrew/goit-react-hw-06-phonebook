@@ -10,7 +10,7 @@ export const ListItem = ({ id, name, number }) => {
   return (
     <ContactItem key={id}>
       {name} : {number}
-      <Button type="button" onClick={dispatch(deleteContact(id))}>
+      <Button type="button" onClick={() => dispatch(deleteContact(id))}>
         <FaRegTimesCircle size="20px" />
       </Button>
     </ContactItem>
